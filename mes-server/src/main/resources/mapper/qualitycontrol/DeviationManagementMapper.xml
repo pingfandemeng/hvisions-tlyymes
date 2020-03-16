@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvisions.mes.qualitycontrol.dao.DeviationManagementMapper">
+    <resultMap id="BaseResultMap" type="com.hvisions.mes.qualitycontrol.entity.DeviationManagement">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="work_order_num" jdbcType="INTEGER" property="workOrderNum"/>
+        <result column="production_batch_num" jdbcType="VARCHAR" property="productionBatchNum"/>
+        <result column="production_line" jdbcType="VARCHAR" property="productionLine"/>
+        <result column="workshop_section" jdbcType="VARCHAR" property="workshopSection"/>
+        <result column="outlier_coding" jdbcType="VARCHAR" property="outlierCoding"/>
+        <result column="exception_name" jdbcType="VARCHAR" property="exceptionName"/>
+        <result column="actual_value" jdbcType="VARCHAR" property="actualValue"/>
+        <result column="lower_value" jdbcType="VARCHAR" property="lowerValue"/>
+        <result column="upper_value" jdbcType="DATE" property="upperValue"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="remark" jdbcType="VARCHAR" property="remark"/>
+        <result column="reason" jdbcType="VARCHAR" property="reason"/>
+        <result column="is_del" jdbcType="INTEGER" property="isDel"/>
+        <result column="creator_id" jdbcType="INTEGER" property="creatorId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="updater_id" jdbcType="INTEGER" property="updaterId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    
+    <select id="selectWithCondition" resultType="com.hvisions.mes.dto.qualitycontrol.DeviationManagementDTO"
+            parameterType="com.hvisions.mes.dto.qualitycontrol.SearchDeviationManagementDTO">
+        select t.work_order_num,
+        t.id,
+        t.production_batch_num,
+        t.production_line,
+        t.workshop_section,
+        t.outlier_coding,
+        t.exception_name,
+        t.actual_value,
+        t.lower_value,
+        t.upper_value,
+        t.create_time,
+        t.status,
+        t.remark,
+        t.reason
+        FROM t_deviation_management t
+        WHERE t.is_del = 0
+        <if test="workOrderNum != null and  workOrderNum != '' ">
+            AND t.work_order_num  like concat('%', #{workOrderNum}, '%')
+        </if>
+        <if test="productionBatchNum != null and  productionBatchNum != '' ">
+            AND t.production_batch_num like concat('%', #{productionBatchNum}, '%')
+        </if>
+        <if test="productionLine != null and  productionLine != '' ">
+            AND t.production_line like concat('%', #{productionLine}, '%')
+        </if>
+        <if test="workshopSection != null and  workshopSection != '' ">
+            AND t.workshop_section like concat('%', #{workshopSection}, '%')
+        </if>
+        <if test="status != null and  status != '' ">
+            AND t.status = #{status}
+        </if>
+        <if test="createTimeBefore !=null and createTimeAfter !=null  ">
+            AND t.create_time BETWEEN  #{createTimeBefore,jdbcType=DATE}
+            and #{createTimeAfter,jdbcType=DATE}
+        </if>
+    </select>
+
+
+</mapper>

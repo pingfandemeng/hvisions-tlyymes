@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.prodplan.dao.YearPlanMapper">
+    <resultMap id="rm" type="com.hvisions.mes.prodplan.entity.YearPlan">
+        <!--如果是下划线转驼峰拼写。如果配置了 mybatis.configuration.map-underscore-to-camel-case=true 则不用配置 -->
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="updater_id" jdbcType="INTEGER" property="updaterId"/>
+       <!-- <result column="site_num" jdbcType="VARCHAR" property="siteNum"/>
+        <result column="plan_start_time" jdbcType="DATE" property="planStartTime"/>
+        <result column="plan_end_time" jdbcType="DATE" property="planEndTime"/>-->
+    </resultMap>
+
+    <select id="findMsgForYearAndPro" resultMap="rm"
+            parameterType="java.util.Map">
+        SELECT year_plan.id,
+        year_plan.create_time,
+        year_plan.creator_id,
+        year_plan.site_num,
+        year_plan.update_time,
+        year_plan.updater_id,
+        year_plan.description,
+        year_plan.num,
+        year_plan.production,
+        year_plan.year
+        FROM year_plan
+        WHERE 1=1
+        <if test="year != 0 and year != null">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND year_plan.year = #{year}
+        </if>
+        <if test="production != null">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND year_plan.production like #{production}
+        </if>
+        <if test="id != null">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND year_plan.id != #{id}
+        </if>
+    </select>
+
+    <!--<update id="updateAmount"
+            parameterType="java.util.Map">
+        UPDATE
+            monthly_plan
+        SET
+            amount= #{amount}
+        WHERE
+            id= #{id}
+    </update>-->
+
+    <select id="getYearPlans" resultMap="rm"
+            parameterType="com.hvisions.mes.dto.prodplan.YearPlanDTO">
+        SELECT
+        t.id,
+        t.create_time,
+        t.creator_id,
+        t.site_num,
+        t.update_time,
+        t.updater_id,
+        t.description,
+        t.production,
+        t.is_pc,
+        t.num,
+        (select material_name from materials.hv_bm_material where id = t.production) as production_name,
+        t.year
+        FROM year_plan t
+        WHERE 1=1
+        <if test="year != null and year != ''">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND t.year = #{year}
+        </if>
+        <if test="production != null and production != ''">
+            AND t.production = #{production}
+        </if>
+    </select>
+
+
+
+    <select id="selectPC" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+        select is_pc from year_plan where id =#{id,jdbcType=INTEGER}
+    </select>
+
+    <update id="changeISPC" parameterType="java.lang.Integer">
+    update year_plan
+    set is_pc=1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.qualitycontrol.dao.IncomingInspectionSampleCheckMapper" >
+  <resultMap id="BaseResultMap" type="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionSampleCheck" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="sample_address" property="sampleAddress" jdbcType="VARCHAR" />
+    <result column="sample_date" property="sampleDate" jdbcType="DATE" />
+    <result column="sample_number" property="sampleNumber" jdbcType="INTEGER" />
+    <result column="sample_amount" property="sampleAmount" jdbcType="INTEGER" />
+    <result column="sample_user_id" property="sampleUserId" jdbcType="INTEGER" />
+    <result column="report_date" property="reportDate" jdbcType="DATE" />
+    <result column="check_numbers" property="checkNumbers" jdbcType="VARCHAR" />
+    <result column="base_info_id" property="baseInfoId" jdbcType="INTEGER" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_incoming_inspection_sample_check
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionSampleCheck" useGeneratedKeys="true" keyProperty="id">
+    insert into t_incoming_inspection_sample_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="id != null">
+          id,
+        </if>
+        <if test="sampleAddress != null">
+          sample_address,
+        </if>
+        <if test="sampleDate != null">
+          sample_date,
+        </if>
+        <if test="sampleNumber != null">
+          sample_number,
+        </if>
+        <if test="sampleAmount != null">
+          sample_amount,
+        </if>
+        <if test="sampleUserId != null">
+          sample_user_id,
+        </if>
+        <if test="reportDate != null">
+          report_date,
+        </if>
+        <if test="checkNumbers != null">
+          check_numbers,
+        </if>
+        <if test="baseInfoId != null">
+          base_info_id,
+        </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updaterId != null">
+        updater_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="sampleAddress != null">
+        #{sampleAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="sampleDate != null">
+        #{sampleDate,jdbcType=DATE},
+      </if>
+      <if test="sampleNumber != null">
+        #{sampleNumber,jdbcType=INTEGER},
+      </if>
+      <if test="sampleAmount != null">
+        #{sampleAmount,jdbcType=INTEGER},
+      </if>
+      <if test="sampleUserId != null">
+        #{sampleUserId,jdbcType=INTEGER},
+      </if>
+      <if test="reportDate != null">
+        #{reportDate,jdbcType=DATE},
+      </if>
+      <if test="checkNumbers != null">
+        #{checkNumbers,jdbcType=VARCHAR},
+      </if>
+      <if test="baseInfoId != null">
+        #{baseInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionSampleCheck" >
+    update t_incoming_inspection_sample_check
+    set sample_address = #{sampleAddress,jdbcType=VARCHAR},
+      sample_date = #{sampleDate,jdbcType=DATE},
+      sample_number = #{sampleNumber,jdbcType=INTEGER},
+      sample_amount = #{sampleAmount,jdbcType=INTEGER},
+      sample_user_id = #{sampleUserId,jdbcType=INTEGER},
+      report_date = #{reportDate,jdbcType=DATE},
+      check_numbers = #{checkNumbers,jdbcType=VARCHAR},
+      base_info_id = #{baseInfoId,jdbcType=INTEGER},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater_id = #{updaterId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_del = #{isDel,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, sample_address, sample_date, sample_number, sample_amount, sample_user_id, 
+    report_date, check_numbers, base_info_id, creator_id, create_time, updater_id, update_time, 
+    is_del
+    from t_incoming_inspection_sample_check
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <select id="selectByBaseInfoId" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, sample_address, sample_date, sample_number, sample_amount, sample_user_id,
+    report_date, check_numbers, base_info_id, creator_id, create_time, updater_id, update_time,
+    is_del
+    from t_incoming_inspection_sample_check
+    where base_info_id = #{id,jdbcType=INTEGER}
+    and is_del = 0
+    limit 1
+  </select>
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, sample_address, sample_date, sample_number, sample_amount, sample_user_id, 
+    report_date, check_numbers, base_info_id, creator_id, create_time, updater_id, update_time, 
+    is_del
+    from t_incoming_inspection_sample_check
+  </select>
+</mapper>

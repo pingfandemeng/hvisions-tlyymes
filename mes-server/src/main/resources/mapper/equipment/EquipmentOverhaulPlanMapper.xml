@@ -1,0 +1,272 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.equipment.dao.EquipmentOverhaulPlanMapper" >
+  <resultMap id="BaseResultMap" type="com.hvisions.mes.equipment.entity.EquipmentOverhaulPlan" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="plant" property="plant" jdbcType="VARCHAR" />
+    <result column="equipment_number" property="equipmentNumber" jdbcType="VARCHAR" />
+    <result column="equipment_type" property="equipmentType" jdbcType="VARCHAR" />
+    <result column="equipment_name" property="equipmentName" jdbcType="VARCHAR" />
+    <result column="overhaul_time" property="overhaulTime" jdbcType="INTEGER" />
+    <result column="stop_time" property="stopTime" jdbcType="INTEGER" />
+    <result column="cycle" property="cycle" jdbcType="INTEGER" />
+    <result column="overhaul_date" property="overhaulDate" jdbcType="DATE" />
+    <result column="remind_days" property="remindDays" jdbcType="INTEGER" />
+    <result column="actual_date" property="actualDate" jdbcType="DATE" />
+    <result column="status" property="status" javaType="INTEGER" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_equipment_overhaul_plan
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvisions.mes.equipment.entity.EquipmentOverhaulPlan" useGeneratedKeys="true" keyProperty="id">
+    insert into t_equipment_overhaul_plan
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        id,
+      </if>
+      <if test="plant != null">
+        plant,
+      </if>
+      <if test="equipmentNumber != null">
+        equipment_number,
+      </if>
+      <if test="equipmentType != null">
+        equipment_type,
+      </if>
+      <if test="equipmentName != null">
+        equipment_name,
+      </if>
+      <if test="overhaulTime != null">
+        overhaul_time,
+      </if>
+      <if test="stopTime != null">
+        stop_time,
+      </if>
+      <if test="cycle != null">
+        `cycle`,
+      </if>
+      <if test="overhaulDate != null">
+        overhaul_date,
+      </if>
+      <if test="remindDays != null">
+        remind_days,
+      </if>
+      <if test="actualDate != null">
+        actual_date,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updaterId != null">
+        updater_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="plant != null">
+        #{plant,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentNumber != null">
+        #{equipmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentType != null">
+        #{equipmentType,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentName != null">
+        #{equipmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="overhaulTime != null">
+        #{overhaulTime,jdbcType=INTEGER},
+      </if>
+      <if test="stopTime != null">
+        #{stopTime,jdbcType=INTEGER},
+      </if>
+      <if test="cycle != null">
+        #{cycle,jdbcType=INTEGER},
+      </if>
+      <if test="overhaulDate != null">
+        #{overhaulDate,jdbcType=DATE},
+      </if>
+      <if test="remindDays != null">
+        #{remindDays,jdbcType=INTEGER},
+      </if>
+      <if test="actualDate != null">
+        #{actualDate,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hvisions.mes.equipment.entity.EquipmentOverhaulPlan" >
+    update t_equipment_overhaul_plan
+    <set>
+      <if test="plant != null">
+        plant = #{plant,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentNumber != null">
+        equipment_number = #{equipmentNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentType != null">
+        equipment_type = #{equipmentType,jdbcType=VARCHAR},
+      </if>
+      <if test="equipmentName != null">
+        equipment_name = #{equipmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="overhaulTime != null">
+        overhaul_time = #{overhaulTime,jdbcType=INTEGER},
+      </if>
+      <if test="stopTime != null">
+        stop_time = #{stopTime,jdbcType=INTEGER},
+      </if>
+      <if test="cycle != null">
+        `cycle` = #{cycle,jdbcType=INTEGER},
+      </if>
+      <if test="overhaulDate != null">
+        overhaul_date = #{overhaulDate,jdbcType=DATE},
+      </if>
+      <if test="remindDays != null">
+        remind_days = #{remindDays,jdbcType=INTEGER},
+      </if>
+      <if test="actualDate != null">
+        actual_date = #{actualDate,jdbcType=DATE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null">
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        updater_id = #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, plant, equipment_number, equipment_type, equipment_name,
+    overhaul_time, stop_time, `cycle`, overhaul_date, remind_days, actual_date, status, creator_id,
+    create_time, updater_id, update_time, is_del
+    from t_equipment_overhaul_plan
+    <where>
+      is_del = 0
+      and id = #{id,jdbcType=INTEGER}
+    </where>
+  </select>
+  <select id="selectAll" resultType="com.hvisions.mes.dto.equipment.SaveEquipmentOverhaulDTO" parameterType="com.hvisions.mes.dto.equipment.SearchEquipmentOverhaulDTO">
+    select
+      a.id,
+      a.plant as plantCode,
+      (select name from equipment.hv_bm_location where code = a.plant limit 1) as plant,
+      a.equipment_number,
+      a.equipment_type,
+      a.equipment_name as equipmentNameCode,
+      (select equipment_name from equipment.hv_bm_equipment where equipment_code = a.equipment_name limit 1) as equipment_name,
+      a.overhaul_time,
+      a.stop_time,
+      a.`cycle`,
+      a.overhaul_date,
+      a.remind_days,
+      a.actual_date,
+      a.status,
+      a.creator_id,
+      a.create_time,
+      a.updater_id,
+      a.update_time,
+      a.is_del
+    from t_equipment_overhaul_plan a
+    <where>
+      a.is_del = 0
+      <if test="startTime != null and endTime != null">
+        and a.overhaul_date between #{startTime} and #{endTime}
+      </if>
+    </where>
+  </select>
+  <select id="findExistById" resultType="java.lang.Integer" parameterType="java.lang.Integer">
+        select
+        count(1)
+    from t_equipment_overhaul_plan
+    <where>
+      is_del = 0
+      and id = #{id,jdbcType=INTEGER}
+    </where>
+  </select>
+  <select id="findRemind" resultMap="BaseResultMap">
+    select
+      a.id,
+      a.plant,
+      a.equipment_number,
+      a.equipment_type,
+      (select equipment_name from equipment.hv_bm_equipment where equipment_code = a.equipment_name limit 1) as equipment_name,
+      a.overhaul_time,
+      a.stop_time,
+      a.`cycle`,
+      a.overhaul_date,
+      a.remind_days,
+      a.actual_date,
+      a.status,
+      a.creator_id,
+      a.create_time,
+      a.updater_id,
+      a.update_time,
+      a.is_del
+    from t_equipment_overhaul_plan a
+    <where>
+      a.is_del = 0
+      and a.status = 1
+    </where>
+  </select>
+  <select id="findUserIdByRole" resultType="java.lang.Integer" parameterType="java.lang.String">
+    SELECT
+        a.user_id
+    FROM
+        authority.sys_user_role a
+    INNER JOIN authority.sys_role b ON a.role_id = b.id
+    WHERE
+        b.`name` = #{roleName}
+  </select>
+</mapper>

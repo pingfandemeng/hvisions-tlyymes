@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.prodplan.dao.MonthlyPlanMapper">
+    <resultMap id="rm" type="com.hvisions.mes.prodplan.entity.MonthlyPlan">
+        <!--如果是下划线转驼峰拼写。如果配置了 mybatis.configuration.map-underscore-to-camel-case=true 则不用配置 -->
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="updater_id" jdbcType="INTEGER" property="updaterId"/>
+        <result column="site_num" jdbcType="VARCHAR" property="siteNum"/>
+        <result column="plan_start_time" jdbcType="DATE" property="planStartTime"/>
+        <result column="plan_end_time" jdbcType="DATE" property="planEndTime"/>
+    </resultMap>
+
+    <select id="getMonthlyPlans" resultType="com.hvisions.mes.dto.prodplan.MonthlyPlanDTO"
+            parameterType="com.hvisions.mes.dto.prodplan.MonthlyPlanQueryDTO">
+        SELECT
+        id,
+        create_time,
+        update_time,
+        creator_id,
+        updater_id,
+        site_num,
+        year,
+        plan_start_time,
+        plan_end_time,
+        (select material_name from materials.hv_bm_material where id = product) as productName,
+        product,
+        amount,
+        user_Date,
+        type
+        FROM monthly_plan t
+        WHERE 1=1
+        <if test="year != 0 and year != null ">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND t.year = #{year}
+        </if>
+        <if test="planStartTime !=null   ">
+            AND Date(t.plan_start_time) = #{planStartTime,jdbcType=DATE}
+        </if>
+        <if test="planEndTime !=null   ">
+            AND t.plan_end_time &lt; #{planEndTime,jdbcType=DATE}
+        </if>
+        <if test="product !=null and  product != '' ">
+            AND t.product like '%${product}%'
+        </if>
+        <if test="amount !=0 and  amount != null ">
+            AND t.amount = #{amount}
+        </if>
+        <if test="type != '' and type != null ">
+            AND t.type = #{type}
+        </if>
+        <if test="month != 0 and month != null">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND t.month = #{month}
+        </if>
+    </select>
+
+    <select id="findMsgForYearAndMonth" resultMap="rm"
+            parameterType="java.util.Map">
+        SELECT
+        monthly_plan.id,
+        monthly_plan.create_time,
+        monthly_plan.creator_id,
+        monthly_plan.site_num,
+        monthly_plan.update_time,
+        monthly_plan.updater_id,
+        monthly_plan.amount,
+        monthly_plan.user_date,
+        monthly_plan.`month`,
+        monthly_plan.`year`,
+        monthly_plan.type,
+        monthly_plan.product,
+        monthly_plan.plan_start_time,
+        monthly_plan.plan_end_time
+        FROM monthly_plan
+        WHERE 1=1
+        <if test="year != 0 and year != null">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND monthly_plan.year = #{year}
+        </if>
+        <if test="month != 0 and month != null">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND monthly_plan.month = #{month}
+        </if>
+        <if test="product != '' and product != null">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND monthly_plan.product = #{product}
+        </if>
+    </select>
+
+    <update id="updateAmount"
+            parameterType="java.util.Map">
+        UPDATE
+            monthly_plan
+        SET
+            amount= #{amount}
+        WHERE
+            id= #{id}
+    </update>
+
+
+    <select id="selectName" resultType="java.lang.String"
+            parameterType="java.lang.String">
+        select id from materials.hv_bm_material where material_name = #{production,jdbcType=VARCHAR}
+    </select>
+
+    <update id="changeISPC" parameterType="java.lang.Integer">
+    update year_plan
+    set is_pc=1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>

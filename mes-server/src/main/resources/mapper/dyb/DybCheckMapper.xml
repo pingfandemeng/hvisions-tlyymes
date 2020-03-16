@@ -1,0 +1,261 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.dyb.dao.DybCheckMapper" >
+  <resultMap id="BaseResultMap" type="com.hvisions.mes.dyb.entity.DybCheck" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dyb_name" property="dybName" jdbcType="INTEGER" />
+    <result column="dyb_number" property="dybNumber" jdbcType="VARCHAR" />
+    <result column="check_period" property="checkPeriod" jdbcType="VARCHAR" />
+    <result column="check_method" property="checkMethod" jdbcType="VARCHAR" />
+    <result column="check_type" property="checkType" jdbcType="INTEGER" />
+    <result column="plant_check_time" property="plantCheckTime" jdbcType="TIMESTAMP" />
+    <result column="dyb_post" property="dybPost" jdbcType="VARCHAR" />
+    <result column="dyb_plant" property="dybPlant" jdbcType="VARCHAR" />
+    <result column="backup" property="backup" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_dyb_check
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvisions.mes.dyb.entity.DybCheck" useGeneratedKeys="true" keyProperty="id">
+    insert into t_dyb_check
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dybName != null">
+        dyb_name,
+      </if>
+      <if test="dybNumber != null">
+        dyb_number,
+      </if>
+      <if test="checkPeriod != null">
+        check_period,
+      </if>
+      <if test="checkMethod != null">
+        check_method,
+      </if>
+      <if test="checkType != null">
+        check_type,
+      </if>
+      <if test="plantCheckTime != null">
+        plant_check_time,
+      </if>
+      <if test="dybPost != null">
+        dyb_post,
+      </if>
+      <if test="dybPlant != null">
+        dyb_plant,
+      </if>
+      <if test="backup != null">
+        `backup`,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updaterId != null">
+        updater_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dybName != null">
+        #{dybName,jdbcType=INTEGER},
+      </if>
+      <if test="dybNumber != null">
+        #{dybNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPeriod != null">
+        #{checkPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="checkMethod != null">
+        #{checkMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="checkType != null">
+        #{checkType,jdbcType=INTEGER},
+      </if>
+      <if test="plantCheckTime != null">
+        #{plantCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dybPost != null">
+        #{dybPost,jdbcType=VARCHAR},
+      </if>
+      <if test="dybPlant != null">
+        #{dybPlant,jdbcType=VARCHAR},
+      </if>
+      <if test="backup != null">
+        #{backup,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hvisions.mes.dyb.entity.DybCheck" >
+    update t_dyb_check
+    <set>
+      <if test="dybName != null">
+        dyb_name = #{dybName,jdbcType=INTEGER},
+      </if>
+      <if test="dybNumber != null">
+        dyb_number = #{dybNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="checkPeriod != null">
+        check_period = #{checkPeriod,jdbcType=VARCHAR},
+      </if>
+      <if test="checkMethod != null">
+        check_method = #{checkMethod,jdbcType=VARCHAR},
+      </if>
+      <if test="checkType != null">
+        check_type = #{checkType,jdbcType=INTEGER},
+      </if>
+      <if test="plantCheckTime != null">
+        plant_check_time = #{plantCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="dybPost != null">
+        dyb_post = #{dybPost,jdbcType=VARCHAR},
+      </if>
+      <if test="dybPlant != null">
+        dyb_plant = #{dybPlant,jdbcType=VARCHAR},
+      </if>
+      <if test="backup != null">
+        `backup` = #{backup,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null">
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        updater_id = #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, dyb_name, dyb_number, check_period, check_method, check_type, plant_check_time, dyb_post,
+    dyb_plant, `backup`, status, creator_id, create_time, updater_id, update_time,
+    is_del
+    from t_dyb_check
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultType="com.hvisions.mes.dto.dyb.DybCheckDTO" >
+    select
+      id,
+      (select equipment_name from equipment.hv_bm_equipment where id = dyb_name) as dyb_name,
+      dyb_number,
+      CASE check_period
+      WHEN 1 THEN '一周'
+      WHEN 2 THEN '一个月'
+      WHEN 3 THEN '半年'
+      WHEN 4 THEN '一年'
+      END as check_period,
+      check_method,
+      if(check_type = 1, '自检', '送检') as check_type,
+      plant_check_time,
+      dyb_post,
+      (SELECT name FROM equipment.hv_bm_location WHERE code = dyb_plant) as dyb_plant,
+      `backup`,
+      status,
+      creator_id,
+      create_time,
+      updater_id,
+      update_time,
+      is_del
+    from t_dyb_check
+    where is_del = 0
+    order by update_time desc
+  </select>
+  <insert id="insertExtend" parameterType="java.util.Map" statementType="STATEMENT">
+    insert into t_dyb_extend
+    <foreach item="item" index="key" collection="map" open="("   separator="," close=")">
+        ${key}
+    </foreach>
+    values
+    <foreach item="item" collection="map" open="("   separator="," close=")">
+        '${item}'
+    </foreach>
+  </insert>
+  <update id="updateExtend" parameterType="java.util.Map" statementType="STATEMENT">
+    update t_dyb_extend set
+    <foreach item="item" index="key" collection="map" separator=",">
+      ${key} = '${item}'
+    </foreach>
+    <where>
+      dyb_id = ${dybId}
+    </where>
+  </update>
+  <select id="findExtend" resultType="java.util.Map">
+    SELECT * FROM t_dyb_extend
+  </select>
+
+  <select id="findRemind" resultMap="BaseResultMap" >
+    select
+      id,
+      dyb_name,
+      dyb_number,
+      check_period,
+      check_method,
+      check_type,
+      plant_check_time,
+      dyb_post,
+      dyb_plant,
+      (select equipment_name from equipment.hv_bm_equipment where id = dyb_name) as `backup`,
+      status,
+      creator_id,
+      create_time,
+      updater_id,
+      update_time,
+      is_del
+    from t_dyb_check
+    <where>
+      is_del = 0
+      and (status = 1 or status = 3 or status = 4)
+    </where>
+  </select>
+</mapper>

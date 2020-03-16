@@ -1,0 +1,25 @@
+#dev配置
+spring:
+  datasource:
+    #数据库驱动，mysql8.0
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: 123456
+    url: jdbc:mysql://localhost:3306/tlyy?characterEncoding=utf-8&useSSL=false&serverTimezone=GMT%2B8
+eureka:
+  instance:
+    prefer-ip-address: true
+    #实例名
+    instance-id: mes-server:${server.port}
+    ip-address: 192.168.1.133
+  client:
+    service-url:
+      #euraka地址
+      defaultZone: http://192.168.1.160:8763/eureka/
+h-visions:
+  #是否添加所有控制器请求记录到log服务
+  log:
+    enable: true
+# 分页数据库类型
+pagehelper:
+  helper-dialect: mysql

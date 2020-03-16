@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.prodplan.dao.TtypeMapper" >
+  <resultMap id="BaseResultMap" type="com.hvisions.mes.prodplan.entity.Ttype" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="prod_line" property="prodLine" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="month" property="month" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_consume_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvisions.mes.prodplan.entity.Ttype" useGeneratedKeys="true" keyProperty="id">
+    insert into t_consume_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="id != null">
+          id,
+        </if>
+        <if test="prodLine != null">
+          prod_line,
+        </if>
+        <if test="name != null">
+          `name`,
+        </if>
+        <if test="year != null">
+          `year`,
+        </if>
+        <if test="month != null">
+          `month`,
+        </if>
+        <if test="creatorId != null">
+          creator_id,
+        </if>
+        <if test="createTime != null">
+          create_time,
+        </if>
+        <if test="updaterId != null">
+          updater_id,
+        </if>
+        <if test="updateTime != null">
+          update_time,
+        </if>
+        <if test="isDel != null">
+          is_del,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null">
+          #{id,jdbcType=INTEGER},
+        </if>
+        <if test="prodLine != null">
+          #{prodLine,jdbcType=VARCHAR},
+        </if>
+        <if test="name != null">
+          #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="year != null">
+          #{year,jdbcType=INTEGER},
+        </if>
+        <if test="month != null">
+          #{month,jdbcType=INTEGER},
+        </if>
+        <if test="creatorId != null">
+          #{creatorId,jdbcType=INTEGER},
+        </if>
+        <if test="createTime != null">
+          #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updaterId != null">
+          #{updaterId,jdbcType=INTEGER},
+        </if>
+        <if test="updateTime != null">
+          #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="isDel != null">
+          #{isDel,jdbcType=INTEGER},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hvisions.mes.prodplan.entity.Ttype" >
+    update t_consume_type
+    <set>
+        <if test="prodLine != null">
+            prod_line = #{prodLine,jdbcType=VARCHAR},
+        </if>
+        <if test="name != null">
+            `name` = #{name,jdbcType=VARCHAR},
+        </if>
+        <if test="year != null">
+            `year` = #{year,jdbcType=INTEGER},
+        </if>
+        <if test="month != null">
+            `month` = #{month,jdbcType=INTEGER},
+        </if>
+        <if test="creatorId != null">
+            creator_id = #{creatorId,jdbcType=INTEGER},
+        </if>
+        <if test="createTime != null">
+            create_time = #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updaterId != null">
+            updater_id = #{updaterId,jdbcType=INTEGER},
+        </if>
+        <if test="updateTime != null">
+            update_time = #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="isDel != null">
+            is_del = #{isDel,jdbcType=INTEGER},
+        </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, prod_line, `name`, `year`, `month`, creator_id, create_time, updater_id, update_time,
+    is_del
+    from t_consume_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, prod_line, `name`, `year`, `month`, creator_id, create_time, updater_id, update_time,
+    is_del
+    from t_consume_type
+  </select>
+
+  <select id="findList" resultType="com.hvisions.mes.dto.prodplan.IndexListDTO" parameterType="com.hvisions.mes.dto.prodplan.SearchConsumeIndexDTO">
+    SELECT
+        a.id AS typeId,
+        a.`year`,
+        a.`month`,
+        (SELECT name FROM equipment.hv_bm_location WHERE code = a.prod_line LIMIT 1) AS prodLine,
+        a.prod_line as prodLineCode,
+        if(a.`name` = 'energy', '能源', '物料')  AS typeName,
+        b.id AS indexId,
+      if(a.`name` = 'energy', (SELECT
+      value_name as valueName
+      FROM
+      t_dict
+      WHERE
+      type_code = 'energy' and value_code = b.index_key LIMIT 1), (
+      SELECT
+      bom_item_name as valueName
+      FROM
+      materials.hv_bm_bom_item where bom_item_code = b.index_key LIMIT 1
+      )) AS indexKey,
+      b.index_key as indexKeyCode,
+        b.index_value AS indexValue,
+        (SELECT value_name FROM t_dict WHERE type_code = 'c_index_unit' and value_code = b.spec LIMIT 1) as spec
+    FROM
+        t_consume_type a
+    LEFT JOIN t_consume_value b ON a.id = b.type_id
+    <where>
+        a.is_del = 0 AND b.is_del = 0
+        <if test="year != null and year != ''">
+            AND a.`year` = #{year}
+        </if>
+        <if test="month != null and month != ''">
+            AND a.`month` = #{month}
+        </if>
+<!--        <if test="prodLine != null and prodLine != ''">-->
+<!--            AND a.prod_line = #{prodLine}-->
+<!--        </if>-->
+    </where>
+      ORDER BY b.update_time DESC
+  </select>
+
+    <select id="findLastMonthInfo" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select id, prod_line, `name`, `year`, `month`, creator_id, create_time, updater_id, update_time,
+    is_del
+    from t_consume_type
+    <where>
+        year = #{year}
+        and month = #{month}
+        and is_del = 0
+    </where>
+  </select>
+    <select id="findByYearAndMonthAndName" resultMap="BaseResultMap" parameterType="java.util.Map">
+    select id, prod_line, `name`, `year`, `month`, creator_id, create_time, updater_id, update_time,
+    is_del
+    from t_consume_type
+    <where>
+        year = #{year}
+        and month = #{month}
+        and name = #{name}
+        and prod_line = #{prodLine}
+        and is_del = 0
+    </where>
+    </select>
+
+    <select id="findBomItem" resultType="java.util.Map">
+        SELECT
+            DISTINCT
+            bom_item_code as valueCode,
+            bom_item_name as valueName
+        FROM
+            materials.hv_bm_bom_item
+    </select>
+</mapper>

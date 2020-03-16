@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.qualitycontrol.dao.IncomingInspectionSampleCheckItemMapper" >
+  <resultMap id="BaseResultMap" type="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionSampleCheckItem" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <id column="check_item_id" property="checkItemId" jdbcType="INTEGER" />
+    <result column="check_type" property="checkType" jdbcType="VARCHAR" />
+    <result column="check_item" property="checkItem" jdbcType="VARCHAR" />
+    <result column="check_actual_result" property="checkActualResult" jdbcType="VARCHAR" />
+    <result column="check_result_confirm" property="checkResultConfirm" jdbcType="VARCHAR" />
+    <result column="sample_check_id" property="sampleCheckId" jdbcType="INTEGER" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="map" >
+    delete from t_incoming_inspection_sample_check_item
+    where id = #{id,jdbcType=INTEGER}
+      and check_item_id = #{checkItemId,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionSampleCheckItem" >
+    insert into t_incoming_inspection_sample_check_item
+      <trim prefix="(" suffix=")" suffixOverrides="," >
+          <if test="id != null">
+              id,
+          </if>
+          <if test="checkItemId != null">
+              check_item_id,
+          </if>
+          <if test="checkType != null">
+              check_type,
+          </if>
+          <if test="checkItem != null">
+              check_item,
+          </if>
+          <if test="checkActualResult != null">
+              check_actual_result,
+          </if>
+          <if test="checkResultConfirm != null">
+              check_result_confirm,
+          </if>
+          <if test="sampleCheckId != null">
+              sample_check_id,
+          </if>
+          <if test="creatorId != null">
+              creator_id,
+          </if>
+          <if test="createTime != null">
+              create_time,
+          </if>
+          <if test="updaterId != null">
+              updater_id,
+          </if>
+          <if test="updateTime != null">
+              update_time,
+          </if>
+          <if test="isDel != null">
+              is_del,
+          </if>
+      </trim>
+      <trim prefix="values (" suffix=")" suffixOverrides="," >
+          <if test="id != null">
+              #{id,jdbcType=INTEGER},
+          </if>
+          <if test="checkItemId != null">
+              #{checkItemId,jdbcType=INTEGER},
+          </if>
+          <if test="checkType != null">
+              #{checkType,jdbcType=VARCHAR},
+          </if>
+          <if test="checkItem != null">
+              #{checkItem,jdbcType=VARCHAR},
+          </if>
+          <if test="checkActualResult != null">
+              #{checkActualResult,jdbcType=VARCHAR},
+          </if>
+          <if test="checkResultConfirm != null">
+              #{checkResultConfirm,jdbcType=VARCHAR},
+          </if>
+          <if test="sampleCheckId != null">
+              #{sampleCheckId,jdbcType=INTEGER},
+          </if>
+          <if test="creatorId != null">
+              #{creatorId,jdbcType=INTEGER},
+          </if>
+          <if test="createTime != null">
+              #{createTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="updaterId != null">
+              #{updaterId,jdbcType=INTEGER},
+          </if>
+          <if test="updateTime != null">
+              #{updateTime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="isDel != null">
+              #{isDel,jdbcType=INTEGER},
+          </if>
+      </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionSampleCheckItem" >
+    update t_incoming_inspection_sample_check_item
+    set check_item = #{checkItem,jdbcType=VARCHAR},
+        check_type = #{checkType,jdbcType=VARCHAR},
+      check_actual_result = #{checkActualResult,jdbcType=VARCHAR},
+      check_result_confirm = #{checkResultConfirm,jdbcType=VARCHAR},
+      sample_check_id = #{sampleCheckId,jdbcType=INTEGER},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater_id = #{updaterId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_del = #{isDel,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+      and check_item_id = #{checkItemId,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="map" >
+    select id, check_item_id, check_type, check_item, check_actual_result, check_result_confirm,
+    sample_check_id, creator_id, create_time, updater_id, update_time, is_del
+    from t_incoming_inspection_sample_check_item
+    where id = #{id,jdbcType=INTEGER}
+      and check_item_id = #{checkItemId,jdbcType=INTEGER}
+  </select>
+    <select id="selectBySampleId" resultMap="BaseResultMap" parameterType="map" >
+    select sci.*
+    from t_incoming_inspection_sample_check_item sci
+    <where>
+        sci.is_del=0
+        and sci.sample_check_id = #{id,jdbcType=INTEGER}
+        and sci.check_type = #{checkType,jdbcType=VARCHAR}
+    </where>
+  </select>
+
+
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, check_item_id, check_type, check_item, check_actual_result, check_result_confirm,
+    sample_check_id, creator_id, create_time, updater_id, update_time, is_del
+    from t_incoming_inspection_sample_check_item
+  </select>
+</mapper>

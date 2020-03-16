@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.qualitycontrol.dao.IncomingInspectionCarCheckMapper" >
+  <resultMap id="BaseResultMap" type="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionCarCheck" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="health_status" property="healthStatus" jdbcType="INTEGER" />
+    <result column="insect_attack_status" property="insectAttackStatus" jdbcType="INTEGER" />
+    <result column="safeguard_procedures_status" property="safeguardProceduresStatus" jdbcType="INTEGER" />
+    <result column="share_car_status" property="shareCarStatus" jdbcType="INTEGER" />
+    <result column="pollute_status" property="polluteStatus" jdbcType="INTEGER" />
+    <result column="is_info_and_notice" property="isInfoAndNotice" jdbcType="INTEGER" />
+    <result column="is_pack_standard" property="isPackStandard" jdbcType="INTEGER" />
+    <result column="is_label_content_ok" property="isLabelContentOk" jdbcType="INTEGER" />
+    <result column="other" property="other" jdbcType="VARCHAR" />
+    <result column="check_user_id" property="checkUserId" jdbcType="INTEGER" />
+    <result column="base_info_id" property="baseInfoId" jdbcType="INTEGER" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+  </resultMap>
+  <insert id="insert" parameterType="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionCarCheck" >
+    insert into t_incoming_inspection_car_check (id, health_status, insect_attack_status, 
+      safeguard_procedures_status, share_car_status, 
+      pollute_status, is_info_and_notice, is_pack_standard, 
+      is_label_content_ok, other, check_user_id, 
+      base_info_id, creator_id, create_time, 
+      updater_id, update_time, is_del
+      )
+    values (#{id,jdbcType=INTEGER}, #{healthStatus,jdbcType=INTEGER}, #{insectAttackStatus,jdbcType=INTEGER}, 
+      #{safeguardProceduresStatus,jdbcType=INTEGER}, #{shareCarStatus,jdbcType=INTEGER}, 
+      #{polluteStatus,jdbcType=INTEGER}, #{isInfoAndNotice,jdbcType=INTEGER}, #{isPackStandard,jdbcType=INTEGER}, 
+      #{isLabelContentOk,jdbcType=INTEGER}, #{other,jdbcType=VARCHAR}, #{checkUserId,jdbcType=INTEGER}, 
+      #{baseInfoId,jdbcType=INTEGER}, #{creatorId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updaterId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{isDel,jdbcType=INTEGER}
+      )
+  </insert>
+</mapper>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.prodplan.dao.DemoEntityMapper">
+    <resultMap id="rm" type="com.hvisions.mes.prodplan.entity.DemoEntity">
+        <!--如果是下划线转驼峰拼写。如果配置了 mybatis.configuration.map-underscore-to-camel-case=true 则不用配置 -->
+        <result column="create_time" jdbcType="DATE" property="createTime"/>
+        <result column="updater_id" jdbcType="INTEGER" property="updaterId"/>
+        <result column="site_num" jdbcType="VARCHAR" property="siteNum"/>
+    </resultMap>
+
+    <select id="getDemoEntity" resultMap="rm"
+            parameterType="java.util.Map">
+        SELECT
+        id,
+        name,
+        create_time,
+        update_time,
+        creator_id,
+        updater_id,
+        site_num,
+        description
+        FROM demo_entity t
+        WHERE 1=1
+        <if test="name != null and name != ''">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND t.name like '%${name}%'
+        </if>
+        <if test="createTimeAfter !=null   ">
+            AND t.create_time &gt; #{createTimeAfter,jdbcType=DATE}
+        </if>
+        <if test="createTimeBefore !=null  ">
+            AND t.create_time &lt; #{createTimeBefore,jdbcType=DATE}
+        </if>
+        <if test="description !=null and  description != '' ">
+            AND t.description like '%${description}%'
+        </if>
+    </select>
+</mapper>

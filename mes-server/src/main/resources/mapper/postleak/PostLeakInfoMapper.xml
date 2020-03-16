@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.postleak.dao.PostLeakInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.hvisions.mes.postleak.entity.PostLeakInfo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="leak_num" property="leakNum" jdbcType="VARCHAR" />
+    <result column="plant" property="plant" jdbcType="VARCHAR" />
+    <result column="section" property="section" jdbcType="VARCHAR" />
+    <result column="find_user_id" property="findUserId" jdbcType="INTEGER" />
+    <result column="find_date" property="findDate" jdbcType="DATE" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="medium" property="medium" jdbcType="VARCHAR" />
+    <result column="leak_description" property="leakDescription" jdbcType="VARCHAR" />
+    <result column="leak_type" property="leakType" jdbcType="VARCHAR" />
+    <result column="plan_measure" property="planMeasure" jdbcType="VARCHAR" />
+    <result column="plan_date" property="planDate" jdbcType="DATE" />
+    <result column="review_user_id" property="reviewUserId" jdbcType="INTEGER" />
+    <result column="review_date" property="reviewDate" jdbcType="DATE" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_post_leak_info
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvisions.mes.postleak.entity.PostLeakInfo" useGeneratedKeys="true" keyProperty="id">
+    insert into t_post_leak_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        id,
+      </if>
+      <if test="leakNum != null">
+        leak_num,
+      </if>
+      <if test="plant != null">
+        plant,
+      </if>
+      <if test="section != null">
+        `section`,
+      </if>
+      <if test="findUserId != null">
+        find_user_id,
+      </if>
+      <if test="findDate != null">
+        find_date,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="medium != null">
+        medium,
+      </if>
+      <if test="leakDescription != null">
+        leak_description,
+      </if>
+      <if test="leakType != null">
+        leak_type,
+      </if>
+      <if test="planMeasure != null">
+        plan_measure,
+      </if>
+      <if test="planDate != null">
+        plan_date,
+      </if>
+      <if test="reviewUserId != null">
+        review_user_id,
+      </if>
+      <if test="reviewDate != null">
+        review_date,
+      </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updaterId != null">
+        updater_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="leakNum != null">
+        #{leakNum,jdbcType=VARCHAR},
+      </if>
+      <if test="plant != null">
+        #{plant,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="findUserId != null">
+        #{findUserId,jdbcType=INTEGER},
+      </if>
+      <if test="findDate != null">
+        #{findDate,jdbcType=DATE},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="medium != null">
+        #{medium,jdbcType=VARCHAR},
+      </if>
+      <if test="leakDescription != null">
+        #{leakDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="leakType != null">
+        #{leakType,jdbcType=VARCHAR},
+      </if>
+      <if test="planMeasure != null">
+        #{planMeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="planDate != null">
+        #{planDate,jdbcType=DATE},
+      </if>
+      <if test="reviewUserId != null">
+        #{reviewUserId,jdbcType=INTEGER},
+      </if>
+      <if test="reviewDate != null">
+        #{reviewDate,jdbcType=DATE},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hvisions.mes.postleak.entity.PostLeakInfo" >
+    update t_post_leak_info
+    <set>
+      <if test="leakNum != null">
+        leak_num = #{leakNum,jdbcType=VARCHAR},
+      </if>
+      <if test="plant != null">
+        plant = #{plant,jdbcType=VARCHAR},
+      </if>
+      <if test="section != null">
+        `section` = #{section,jdbcType=VARCHAR},
+      </if>
+      <if test="findUserId != null">
+        find_user_id = #{findUserId,jdbcType=INTEGER},
+      </if>
+      <if test="findDate != null">
+        find_date = #{findDate,jdbcType=DATE},
+      </if>
+      <if test="position != null">
+        position = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="medium != null">
+        medium = #{medium,jdbcType=VARCHAR},
+      </if>
+      <if test="leakDescription != null">
+        leak_description = #{leakDescription,jdbcType=VARCHAR},
+      </if>
+      <if test="leakType != null">
+        leak_type = #{leakType,jdbcType=VARCHAR},
+      </if>
+      <if test="planMeasure != null">
+        plan_measure = #{planMeasure,jdbcType=VARCHAR},
+      </if>
+      <if test="planDate != null">
+        plan_date = #{planDate,jdbcType=DATE},
+      </if>
+      <if test="reviewUserId != null">
+        review_user_id = #{reviewUserId,jdbcType=INTEGER},
+      </if>
+      <if test="reviewDate != null">
+        review_date = #{reviewDate,jdbcType=DATE},
+      </if>
+      <if test="creatorId != null">
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        updater_id = #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, leak_num, plant, `section`, find_user_id, find_date, position, medium,
+    leak_description, leak_type, plan_measure, plan_date, review_user_id, review_date, 
+    creator_id, create_time, updater_id, update_time, is_del
+    from t_post_leak_info
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" parameterType="com.hvisions.mes.dto.postleak.SearchPostLeakDTO" resultType="com.hvisions.mes.dto.postleak.PostLeakListDTO" >
+    SELECT
+        a.id,
+        a.leak_num,
+        a.plant,
+        (SELECT name FROM equipment.hv_bm_location WHERE code = a.plant) as plantName,
+        a.section,
+        (SELECT user_name FROM authority.sys_user WHERE id = a.find_user_id) AS find_user,
+        a.find_date,
+        a.position,
+        a.`medium`,
+        a.leak_description,
+        (SELECT value_name FROM t_dict WHERE value_code = a.leak_type) AS leak_type_name,
+        a.leak_type as leak_type_code,
+        a.plan_measure,
+        a.plan_date,
+        (SELECT user_name FROM authority.sys_user WHERE id = a.review_user_id) AS review_user,
+        a.review_date,
+        (SELECT user_name FROM authority.sys_user WHERE id = b.dispose_user_id) AS dispose_user,
+        b.done_date,
+        b.done_case,
+        b.`backup`
+    FROM
+        t_post_leak_info a
+    LEFT JOIN t_post_leak_info_log b ON a.id = b.post_leak_info_id
+    WHERE
+        a.is_del = 0
+    <if test="plant != null and plant != ''">
+      and a.plant = #{plant}
+    </if>
+    <if test="findUser != null">
+      and a.find_user_id = #{findUser}
+    </if>
+    <if test="findDate != null">
+      and a.find_date = #{findDate}
+    </if>
+    <if test="leakType != null and leakType != ''">
+      and a.leak_type = #{leakType}
+    </if>
+    <if test="disposeUser != null">
+      and b.dispose_user_id = #{disposeUser}
+    </if>
+  </select>
+
+  <select id="findRemind" resultType="com.hvisions.mes.dto.postleak.PostLeakListDTO">
+    SELECT
+      a.id,
+      a.leak_num,
+      a.plant,
+      (SELECT name FROM equipment.hv_bm_location WHERE code = a.plant) as plantName,
+      a.section,
+      (SELECT user_name FROM authority.sys_user WHERE id = a.find_user_id) AS find_user,
+      a.find_date,
+      a.position,
+      a.`medium`,
+      a.leak_description,
+      (SELECT value_name FROM t_dict WHERE value_code = a.leak_type) AS leak_type_name,
+      a.leak_type as leak_type_code,
+      a.plan_measure,
+      a.plan_date,
+      (SELECT user_name FROM authority.sys_user WHERE id = a.review_user_id) AS review_user,
+      a.review_date,
+      (SELECT user_name FROM authority.sys_user WHERE id = b.dispose_user_id) AS dispose_user,
+      b.done_date,
+      b.done_case,
+      b.`backup`
+    FROM
+    t_post_leak_info a
+    LEFT JOIN t_post_leak_info_log b ON a.id = b.post_leak_info_id
+    <where>
+      a.is_del = 0
+      AND a.review_user_id is NULL
+      AND b.dispose_user_id is NULL
+    </where>
+  </select>
+</mapper>

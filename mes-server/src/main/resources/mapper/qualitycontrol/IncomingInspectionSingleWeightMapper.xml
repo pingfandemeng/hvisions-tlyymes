@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.qualitycontrol.dao.IncomingInspectionSingleWeightMapper" >
+  <resultMap id="BaseResultMap" type="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionSingleWeight" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="check_count" property="checkCount" jdbcType="INTEGER" />
+    <result column="weight_range_start" property="weightRangeStart" jdbcType="DECIMAL" />
+    <result column="weight_range_end" property="weightRangeEnd" jdbcType="DECIMAL" />
+    <result column="mean_weight" property="meanWeight" jdbcType="DECIMAL" />
+    <result column="weight_unit" property="weightUnit" jdbcType="VARCHAR" />
+    <result column="result_confirm" property="resultConfirm" jdbcType="VARCHAR" />
+    <result column="sample_check_id" property="sampleCheckId" jdbcType="INTEGER" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_incoming_inspection_single_weight
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionSingleWeight" >
+    insert into t_incoming_inspection_single_weight
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+        <if test="id != null">
+          id,
+        </if>
+        <if test="checkCount != null">
+          check_count,
+        </if>
+        <if test="weightRangeStart != null">
+          weight_range_start,
+        </if>
+        <if test="weightRangeEnd != null">
+          weight_range_end,
+        </if>
+        <if test="meanWeight != null">
+          mean_weight,
+        </if>
+        <if test="weightUnit != null">
+          weight_unit,
+        </if>
+        <if test="resultConfirm != null">
+          result_confirm,
+        </if>
+        <if test="sampleCheckId != null">
+          sample_check_id,
+        </if>
+        <if test="creatorId != null">
+          creator_id,
+        </if>
+        <if test="createTime != null">
+          create_time,
+        </if>
+        <if test="updaterId != null">
+          updater_id,
+        </if>
+        <if test="updateTime != null">
+          update_time,
+        </if>
+        <if test="isDel != null">
+          is_del,
+        </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+        <if test="id != null">
+          #{id,jdbcType=INTEGER},
+        </if>
+        <if test="checkCount != null">
+          #{checkCount,jdbcType=INTEGER},
+        </if>
+        <if test="weightRangeStart != null">
+          #{weightRangeStart,jdbcType=DECIMAL},
+        </if>
+        <if test="weightRangeEnd != null">
+          #{weightRangeEnd,jdbcType=DECIMAL},
+        </if>
+        <if test="meanWeight != null">
+          #{meanWeight,jdbcType=DECIMAL},
+        </if>
+        <if test="weightUnit != null">
+          #{weightUnit,jdbcType=VARCHAR},
+        </if>
+        <if test="resultConfirm != null">
+          #{resultConfirm,jdbcType=VARCHAR},
+        </if>
+        <if test="sampleCheckId != null">
+          #{sampleCheckId,jdbcType=INTEGER},
+        </if>
+        <if test="creatorId != null">
+          #{creatorId,jdbcType=INTEGER},
+        </if>
+        <if test="createTime != null">
+          #{createTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="updaterId != null">
+          #{updaterId,jdbcType=INTEGER},
+        </if>
+        <if test="updateTime != null">
+          #{updateTime,jdbcType=TIMESTAMP},
+        </if>
+        <if test="isDel != null">
+          #{isDel,jdbcType=INTEGER},
+        </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionSingleWeight" >
+    update t_incoming_inspection_single_weight
+    set check_count = #{checkCount,jdbcType=INTEGER},
+      weight_range_start = #{weightRangeStart,jdbcType=DECIMAL},
+      weight_range_end = #{weightRangeEnd,jdbcType=DECIMAL},
+      mean_weight = #{meanWeight,jdbcType=DECIMAL},
+      weight_unit = #{weightUnit,jdbcType=VARCHAR},
+      result_confirm = #{resultConfirm,jdbcType=VARCHAR},
+      sample_check_id = #{sampleCheckId,jdbcType=INTEGER},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater_id = #{updaterId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_del = #{isDel,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, check_count, weight_range_start, weight_range_end, mean_weight, weight_unit, 
+    result_confirm, sample_check_id, creator_id, create_time, updater_id, update_time, 
+    is_del
+    from t_incoming_inspection_single_weight
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, check_count, weight_range_start, weight_range_end, mean_weight, weight_unit, 
+    result_confirm, sample_check_id, creator_id, create_time, updater_id, update_time, 
+    is_del
+    from t_incoming_inspection_single_weight
+  </select>
+</mapper>

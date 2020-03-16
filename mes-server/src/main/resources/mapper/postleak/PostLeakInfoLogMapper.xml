@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.postleak.dao.PostLeakInfoLogMapper" >
+  <resultMap id="BaseResultMap" type="com.hvisions.mes.postleak.entity.PostLeakInfoLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dispose_user_id" property="disposeUserId" jdbcType="INTEGER" />
+    <result column="done_date" property="doneDate" jdbcType="TIMESTAMP" />
+    <result column="done_case" property="doneCase" jdbcType="VARCHAR" />
+    <result column="backup" property="backup" jdbcType="VARCHAR" />
+    <result column="post_leak_info_id" property="postLeakInfoId" jdbcType="INTEGER" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_post_leak_info_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvisions.mes.postleak.entity.PostLeakInfoLog" >
+    insert into t_post_leak_info_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        id,
+      </if>
+      <if test="disposeUserId != null">
+        dispose_user_id,
+      </if>
+      <if test="doneDate != null">
+        done_date,
+      </if>
+      <if test="doneCase != null">
+        done_case,
+      </if>
+      <if test="backup != null">
+        `backup`,
+      </if>
+      <if test="postLeakInfoId != null">
+        post_leak_info_id,
+      </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updaterId != null">
+        updater_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="disposeUserId != null">
+        #{disposeUserId,jdbcType=INTEGER},
+      </if>
+      <if test="doneDate != null">
+        #{doneDate,jdbcType=TIMESTAMP},
+      </if>
+      <if test="doneCase != null">
+        #{doneCase,jdbcType=VARCHAR},
+      </if>
+      <if test="backup != null">
+        #{backup,jdbcType=VARCHAR},
+      </if>
+      <if test="postLeakInfoId != null">
+        #{postLeakInfoId,jdbcType=INTEGER},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hvisions.mes.postleak.entity.PostLeakInfoLog" >
+    update t_post_leak_info_log
+    set dispose_user_id = #{disposeUserId,jdbcType=INTEGER},
+      done_date = #{doneDate,jdbcType=TIMESTAMP},
+      done_case = #{doneCase,jdbcType=VARCHAR},
+      `backup` = #{backup,jdbcType=VARCHAR},
+      post_leak_info_id = #{postLeakInfoId,jdbcType=INTEGER},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater_id = #{updaterId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_del = #{isDel,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, dispose_user_id, done_date, done_case, `backup`, post_leak_info_id, creator_id, 
+    create_time, updater_id, update_time, is_del
+    from t_post_leak_info_log
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select id, dispose_user_id, done_date, done_case, `backup`, post_leak_info_id, creator_id, 
+    create_time, updater_id, update_time, is_del
+    from t_post_leak_info_log
+  </select>
+  <update id="updateByPostLeakInfoId" parameterType="java.lang.Integer" >
+    update t_post_leak_info_log
+    set is_del = #{isDel,jdbcType=INTEGER}
+    where post_leak_info_id = #{postLeakInfoId,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPostLeakId" parameterType="com.hvisions.mes.postleak.entity.PostLeakInfoLog" >
+    update t_post_leak_info_log
+    set dispose_user_id = #{disposeUserId,jdbcType=INTEGER},
+      done_date = #{doneDate,jdbcType=TIMESTAMP},
+      done_case = #{doneCase,jdbcType=VARCHAR},
+      `backup` = #{backup,jdbcType=VARCHAR},
+      updater_id = #{updaterId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP}
+    where post_leak_info_id = #{postLeakInfoId,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByBackup" parameterType="java.util.Map" >
+    update t_post_leak_info_log
+    set `backup` = #{backup,jdbcType=VARCHAR}
+    where post_leak_info_id = #{postLeakInfoId,jdbcType=INTEGER}
+  </update>
+</mapper>

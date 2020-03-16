@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.hvisions.mes.dyb.dao.DybCheckLogMapper" >
+  <resultMap id="BaseResultMap" type="com.hvisions.mes.dyb.entity.DybCheckLog" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="dyb_check_id" property="dybCheckId" jdbcType="INTEGER" />
+    <result column="plant_check_time" property="plantCheckTime" jdbcType="TIMESTAMP" />
+    <result column="reality_check_time" property="realityCheckTime" jdbcType="TIMESTAMP" />
+    <result column="check_result" property="checkResult" jdbcType="VARCHAR" />
+    <result column="creator_id" property="creatorId" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="updater_id" property="updaterId" jdbcType="INTEGER" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="is_del" property="isDel" jdbcType="INTEGER" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_dyb_check_log
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.hvisions.mes.dyb.entity.DybCheckLog" >
+    insert into t_dyb_check_log
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        id,
+      </if>
+      <if test="dybCheckId != null">
+        dyb_check_id,
+      </if>
+      <if test="plantCheckTime != null">
+        plant_check_time,
+      </if>
+      <if test="realityCheckTime != null">
+        reality_check_time,
+      </if>
+      <if test="checkResult != null">
+        check_result,
+      </if>
+      <if test="creatorId != null">
+        creator_id,
+      </if>
+      <if test="createTime != null">
+        create_time,
+      </if>
+      <if test="updaterId != null">
+        updater_id,
+      </if>
+      <if test="updateTime != null">
+        update_time,
+      </if>
+      <if test="isDel != null">
+        is_del,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="dybCheckId != null">
+        #{dybCheckId,jdbcType=INTEGER},
+      </if>
+      <if test="plantCheckTime != null">
+        #{plantCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realityCheckTime != null">
+        #{realityCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkResult != null">
+        #{checkResult,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        #{isDel,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.hvisions.mes.dyb.entity.DybCheckLog" >
+    update t_dyb_check_log
+    <set>
+      <if test="dybCheckId != null">
+        dyb_check_id = #{dybCheckId,jdbcType=INTEGER},
+      </if>
+      <if test="plantCheckTime != null">
+        plant_check_time = #{plantCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realityCheckTime != null">
+        reality_check_time = #{realityCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkResult != null">
+        check_result = #{checkResult,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        updater_id = #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select id, dyb_check_id, plant_check_time, reality_check_time, check_result, creator_id, create_time,
+    updater_id, update_time, is_del
+    from t_dyb_check_log
+    <where>
+      is_del = 0
+      and id = #{id,jdbcType=INTEGER}
+    </where>
+  </select>
+  <select id="selectAll" resultType="com.hvisions.mes.dto.dyb.DybCheckLogDTO" >
+    select
+      a.id,
+      a.dyb_check_id,
+      a.plant_check_time,
+      a.reality_check_time,
+      a.check_result,
+      a.creator_id,
+      a.create_time,
+      (SELECT user_name FROM authority.sys_user WHERE id = a.updater_id) as user,
+      a.update_time,
+      a.is_del
+    from t_dyb_check_log a
+    <where>
+      a.is_del = 0
+      and a.dyb_check_id = #{dybId}
+    </where>
+  </select>
+
+  <update id="updateByDybId" parameterType="com.hvisions.mes.dyb.entity.DybCheckLog" >
+    update t_dyb_check_log
+    <set>
+      <if test="plantCheckTime != null">
+        plant_check_time = #{plantCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="realityCheckTime != null">
+        reality_check_time = #{realityCheckTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="checkResult != null">
+        check_result = #{checkResult,jdbcType=VARCHAR},
+      </if>
+      <if test="creatorId != null">
+        creator_id = #{creatorId,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null">
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updaterId != null">
+        updater_id = #{updaterId,jdbcType=INTEGER},
+      </if>
+      <if test="updateTime != null">
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isDel != null">
+        is_del = #{isDel,jdbcType=INTEGER},
+      </if>
+    </set>
+    where dyb_check_id = #{dybCheckId,jdbcType=INTEGER}
+  </update>
+</mapper>

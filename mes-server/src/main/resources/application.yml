@@ -1,0 +1,115 @@
+#默认公共配置
+#开启feign的hystrix熔断功能
+feign:
+  hystrix:
+    enabled: false
+spring:
+  cloud:
+    refresh:
+      #为了解决springboot与spring cloud数据库初始化检查添加的配置项的循环依赖问题所添加
+      refreshable: none
+  profiles:
+    # dev本地开发环境，test测试环境，prod生产环境
+    active: dev
+  http:
+    encoding:
+      force: true
+    charset: UTF-8
+    enabled: true
+  tomcat:
+    uri-encoding: UTF-8
+  #使用redis作为缓存
+  cache:
+    type: redis
+  #redis 地址和端口号
+  redis:
+    host: 192.168.1.160
+    port: 6379
+  #序列化时间格式
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
+  jpa:
+    properties:
+      hibernate:
+        enable_lazy_load_no_trans: true
+    #是否打印Jpa生成的sql语句,生产环境可以关闭
+    show-sql: true
+    #数据库生成策略，如果打开会根据entity对象生成数据库。尽量不要使用
+    hibernate:
+      ddl-auto: update
+  #服务注册名
+  application:
+    name: Lau
+  #国际化配置
+  messages:
+    basename: i18n/messages
+    cache-seconds: -1
+    encoding: utf-8
+ribbon:
+  #请求处理的超时时间
+  ReadTimeout: 120000
+  #请求连接的超时时间
+  ConnectTimeout: 30000
+mybatis:
+  configuration:
+    map-underscore-to-camel-case: true
+  typeAliasesPackage: com.hvisions.mes.dto
+  mapperLocations: classpath:mapper/*.xml
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+  page-size-zero: true
+h-visions:
+  #服务名称,可以使用中文，日志服务会使用
+  service-name: mes-server
+  #可以使用swagger的接口，使用对应的测试方法，生成api文档，支持markdown和ascii
+  swagger:
+    api-url: http://localhost:${server.port}/v2/api-docs;
+    asciidoc-dir: ./build/asciidoc/
+    markdown-dir: ./build/markdown/
+server:
+  port: 9999
+#开启所有的健康监控信息
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+  endpoint:
+    health:
+      show-details: ALWAYS
+#info标签：可以在springboot admin的Insights界面Detail中进行展示,也可以再eureka界面点击实例名称查看
+info:
+  build:
+    artifact: '@project.artifactId@'
+    version: '@project.version@'
+    server-name: ${h-visions.service-name}
+logging:
+  level:
+    com:
+      hvisions:
+        mes: debug
+# 任务调度参数设置
+task:
+  # 设备检修
+  equipment:
+    cron: 0 0 06,12 * * ?
+    roleName: 设备检修组
+    node: day
+    title: 设备检修提醒
+    url: /equipment-check
+  # 电仪表校验
+  dyb:
+    cron: 0 0 06,12 * * ?
+    roleName: 电仪表校验组
+    title: 电仪表校验提醒
+    url: /dyb
+  # 岗位漏点
+  postleak:
+    cron: 0 0 06,12 * * ?
+    roleName: 岗位漏点组
+    title: 岗位漏点预计处理时间提醒
+    url: /postLeak

@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.hvisions.mes.qualitycontrol.dao.IncomingInspectionBaseInfoMapper">
+    <resultMap id="BaseResultMap" type="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionBaseInfo">
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="cargo_id" jdbcType="INTEGER" property="cargoId"/>
+        <result column="cargo_name" jdbcType="VARCHAR" property="cargoName"/>
+        <result column="supplier" jdbcType="VARCHAR" property="supplier"/>
+        <result column="source" jdbcType="VARCHAR" property="source"/>
+        <result column="manufacturer" jdbcType="VARCHAR" property="manufacturer"/>
+        <result column="cargo_number" jdbcType="VARCHAR" property="cargoNumber"/>
+        <result column="cargo_spec" jdbcType="VARCHAR" property="cargoSpec"/>
+        <result column="supplier_batch_number" jdbcType="VARCHAR" property="supplierBatchNumber"/>
+        <result column="prod_date_start" jdbcType="DATE" property="prodDateStart"/>
+        <result column="prod_date_end" jdbcType="DATE" property="prodDateEnd"/>
+        <result column="period_of_validity" jdbcType="VARCHAR" property="periodOfValidity"/>
+        <result column="arrival_date" jdbcType="DATE" property="arrivalDate"/>
+        <result column="cargo_batch_number" jdbcType="VARCHAR" property="cargoBatchNumber"/>
+        <result column="batch" jdbcType="INTEGER" property="batch"/>
+        <result column="is_qualified_supplier" jdbcType="INTEGER" property="isQualifiedSupplier"/>
+        <result column="is_coa_and_info" jdbcType="INTEGER" property="isCoaAndInfo"/>
+        <result column="creator_id" jdbcType="INTEGER" property="creatorId"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="updater_id" jdbcType="INTEGER" property="updaterId"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="is_del" jdbcType="INTEGER" property="isDel"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="supplier_name" jdbcType="VARCHAR" property="supplierName"/>
+    </resultMap>
+    <update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    update t_incoming_inspection_base_info
+    set is_Del=1
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+    <insert id="insert" parameterType="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionBaseInfo"
+            useGeneratedKeys="true" keyProperty="id">
+    insert into t_incoming_inspection_base_info (id, cargo_id,cargo_name, supplier,
+      `source`, manufacturer, cargo_number, 
+      cargo_spec, supplier_batch_number, prod_date_start, 
+      prod_date_end, period_of_validity, arrival_date, 
+      cargo_batch_number, batch, is_qualified_supplier, 
+      is_coa_and_info, creator_id, create_time, 
+      updater_id, update_time, is_del, state
+      )
+    values (#{id,jdbcType=INTEGER},#{cargoId,jdbcType=INTEGER}, #{cargoName,jdbcType=VARCHAR}, #{supplier,jdbcType=VARCHAR},
+      #{source,jdbcType=VARCHAR}, #{manufacturer,jdbcType=VARCHAR}, #{cargoNumber,jdbcType=VARCHAR}, 
+      #{cargoSpec,jdbcType=VARCHAR}, #{supplierBatchNumber,jdbcType=VARCHAR}, #{prodDateStart,jdbcType=DATE}, 
+      #{prodDateEnd,jdbcType=DATE}, #{periodOfValidity,jdbcType=VARCHAR}, #{arrivalDate,jdbcType=DATE}, 
+      #{cargoBatchNumber,jdbcType=VARCHAR}, #{batch,jdbcType=INTEGER}, #{isQualifiedSupplier,jdbcType=INTEGER}, 
+      #{isCoaAndInfo,jdbcType=INTEGER}, #{creatorId,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updaterId,jdbcType=INTEGER}, #{updateTime,jdbcType=TIMESTAMP}, #{isDel,jdbcType=INTEGER}, #{state,jdbcType=INTEGER}
+      )
+  </insert>
+    <update id="updateByPrimaryKey" parameterType="com.hvisions.mes.qualitycontrol.entity.IncomingInspectionBaseInfo">
+    update t_incoming_inspection_base_info
+    set cargo_name = #{cargoName,jdbcType=VARCHAR},
+      cargo_id = #{cargoId,jdbcType=INTEGER},
+      supplier = #{supplier,jdbcType=VARCHAR},
+      `source` = #{source,jdbcType=VARCHAR},
+      manufacturer = #{manufacturer,jdbcType=VARCHAR},
+      cargo_number = #{cargoNumber,jdbcType=VARCHAR},
+      cargo_spec = #{cargoSpec,jdbcType=VARCHAR},
+      supplier_batch_number = #{supplierBatchNumber,jdbcType=VARCHAR},
+      prod_date_start = #{prodDateStart,jdbcType=DATE},
+      prod_date_end = #{prodDateEnd,jdbcType=DATE},
+      period_of_validity = #{periodOfValidity,jdbcType=VARCHAR},
+      arrival_date = #{arrivalDate,jdbcType=DATE},
+      cargo_batch_number = #{cargoBatchNumber,jdbcType=VARCHAR},
+      batch = #{batch,jdbcType=INTEGER},
+      is_qualified_supplier = #{isQualifiedSupplier,jdbcType=INTEGER},
+      is_coa_and_info = #{isCoaAndInfo,jdbcType=INTEGER},
+      creator_id = #{creatorId,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      updater_id = #{updaterId,jdbcType=INTEGER},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      is_del = #{isDel,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER} and t_incoming_inspection_base_info.is_del=0
+  </update>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select id,cargo_id, cargo_name, supplier, `source`, manufacturer, cargo_number, cargo_spec,
+    supplier_batch_number, prod_date_start, prod_date_end, period_of_validity, arrival_date, 
+    cargo_batch_number, batch, is_qualified_supplier, is_coa_and_info, creator_id, create_time, 
+    updater_id, update_time, is_del,state
+    from t_incoming_inspection_base_info
+    where id = #{id,jdbcType=INTEGER} and t_incoming_inspection_base_info.is_del=0
+  </select>
+    <select id="selectAll" parameterType="com.hvisions.mes.dto.qualitycontrol.SearchIncomingInspectionBaseInfoDTO"
+            resultType="com.hvisions.mes.dto.qualitycontrol.SaveIncomingInspectionBaseInfoDTO">
+    select ts.name as supplier_name, bif.id,bif.cargo_id, bif.cargo_name, bif.supplier, bif.`source`, bif.manufacturer, bif.cargo_number, bif.cargo_spec,
+    bif.supplier_batch_number,bif.prod_date_start, bif.prod_date_end, bif.period_of_validity, bif.arrival_date,
+    bif.cargo_batch_number, bif.batch, bif.is_qualified_supplier, bif.is_coa_and_info, bif.creator_id, bif.create_time,
+    bif.updater_id, bif.update_time, bif.is_del,bif.state
+    from t_incoming_inspection_base_info bif
+		left join t_supplier_info ts
+		on bif.supplier=ts.id where bif.is_del=0
+        <if test="cargoId != 0 and cargoId != null">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND bif.cargo_id = #{cargoId}
+        </if>
+        <if test="supplier != 0 and supplier != null">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND bif.supplier = #{supplier}
+        </if>
+        <if test="arrivalDataBefore != null and arrivalDataAfter != null ">
+            <!--$这种写法会造成sql注入。小心使用，或者使用CONCAT('%',#{},'%') 不会造成sql注入。但是要考虑非mysql的兼容问题-->
+            AND bif.arrival_date between #{arrivalDataBefore} and  #{arrivalDataAfter}
+        </if>
+
+  </select>
+    <select id="selectDetail" parameterType="com.hvisions.mes.dto.qualitycontrol.IncomingInspectionBaseInfoDetailDTO"
+            resultType="com.hvisions.mes.dto.qualitycontrol.IncomingInspectionBaseInfoDetailDTO">
+     select ts.name as supplier_name,bif.*,
+     (SELECT user_name FROM authority.sys_user WHERE id = cp.bj_user_id) as bjUser,
+    (SELECT user_name FROM authority.sys_user WHERE id = cp.jb_user_id) as jbUser,
+    (SELECT user_name FROM authority.sys_user WHERE id = cc.check_user_id) as checkUserCar,
+    (SELECT user_name FROM authority.sys_user WHERE id = sc.sample_user_id) as sampleUser,
+    (SELECT user_name FROM authority.sys_user WHERE id = cp.check_user_id) as checkUser,
+    (SELECT user_name FROM authority.sys_user WHERE id = cp.review_user_id) as reviewUser,
+    (SELECT user_name FROM authority.sys_user WHERE id = cp.fx_user_id) as fxUser,
+     cp.*,cc.*,sc.*,sci.*,sw.*
+    from t_incoming_inspection_base_info  bif
+    left join t_supplier_info ts
+		on bif.supplier=ts.id
+		left join t_incoming_inspection_confirm_people cp
+		on bif.id=cp.base_info_id
+    left join t_incoming_inspection_car_check cc
+		on bif.id=cc.base_info_id
+		left join t_incoming_inspection_sample_check sc
+		on bif.id=sc.base_info_id
+		left join t_incoming_inspection_sample_check_item sci
+		on sc.id=sci.sample_check_id
+		left join t_incoming_inspection_single_weight sw
+		on sw.sample_check_id=sc.id
+		where bif.id = #{id,jdbcType=INTEGER}
+		limit 1
+  </select>
+
+    <update id="deleteCarCheck" parameterType="java.lang.Integer">
+    update t_incoming_inspection_car_check
+    set is_Del=1
+    where base_info_id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <update id="deleteConfirmPeople" parameterType="java.lang.Integer">
+    update t_incoming_inspection_confirm_people
+    set is_Del=1
+    where base_info_id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <update id="deleteSampleCheck" parameterType="java.lang.Integer">
+    update t_incoming_inspection_sample_check
+    set is_Del=1
+    where base_info_id = #{id,jdbcType=INTEGER}
+  </update>
+
+    <update id="deleteSampleCheckItem" parameterType="java.lang.Integer">
+    update t_incoming_inspection_sample_check_item
+    set is_Del=1
+    where sample_check_id = (select id from t_incoming_inspection_sample_check where base_info_id=#{id,jdbcType=INTEGER})
+  </update>
+
+    <update id="deleteSingleWeight" parameterType="java.lang.Integer">
+    update t_incoming_inspection_single_weight
+    set is_Del=1
+    where sample_check_id = (select id from t_incoming_inspection_sample_check where base_info_id=#{id,jdbcType=INTEGER})
+  </update>
+
+    <update id="next" parameterType="java.lang.Integer">
+    update t_incoming_inspection_base_info
+    set state=state+1
+    where id = #{id,jdbcType=INTEGER} and t_incoming_inspection_base_info.is_del=0
+  </update>
+
+    <update id="confirmCoaAndInfo" parameterType="java.lang.Integer">
+    update t_incoming_inspection_base_info
+    set is_coa_and_info = #{isCoaAndInfo,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+</mapper>
